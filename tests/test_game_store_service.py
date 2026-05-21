@@ -26,7 +26,9 @@ class TestGameStoreService(unittest.TestCase):
         # Додавання тестових ігор
         self.game1 = self.game_repo.add(Game(0, "Cyberpunk 2077", GameGenre.RPG, 299.99, "CD Projekt", 2020, True, 4.5))
         self.game2 = self.game_repo.add(Game(0, "The Witcher 3", GameGenre.RPG, 199.99, "CD Projekt", 2015, True, 4.9))
-        self.game3 = self.game_repo.add(Game(0, "Stardew Valley", GameGenre.SIMULATION, 79.99, "ConcernedApe", 2016, True, 4.8))
+        self.game3 = self.game_repo.add(
+            Game(0, "Stardew Valley", GameGenre.SIMULATION, 79.99, "ConcernedApe", 2016, True, 4.8)
+        )
         self.game4 = self.game_repo.add(Game(0, "CS:GO", GameGenre.ACTION, 0.0, "Valve", 2012, True, 4.2))
 
         # Додавання тестових користувачів
@@ -123,6 +125,7 @@ class TestGameStoreService(unittest.TestCase):
 
         # Змінюємо дату на 15 днів тому
         from datetime import datetime, timedelta
+
         purchase.purchase_date = datetime.now() - timedelta(days=15)
         self.purchase_repo.update(purchase)
 

@@ -6,6 +6,7 @@ from enum import Enum
 
 class GameGenre(Enum):
     """Жанри ігор"""
+
     ACTION = "action"
     RPG = "rpg"
     STRATEGY = "strategy"
@@ -18,6 +19,7 @@ class GameGenre(Enum):
 @dataclass
 class Game:
     """Модель гри"""
+
     id: int
     title: str
     genre: GameGenre

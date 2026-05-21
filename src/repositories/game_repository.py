@@ -26,24 +26,15 @@ class GameRepository:
     def find_by_title(self, title: str) -> List[Game]:
         """Знаходить ігри за назвою (частковий збіг)"""
         title_lower = title.lower()
-        return [
-            game for game in self._games.values()
-            if title_lower in game.title.lower() and game.is_available
-        ]
+        return [game for game in self._games.values() if title_lower in game.title.lower() and game.is_available]
 
     def find_by_genre(self, genre: GameGenre) -> List[Game]:
         """Знаходить ігри за жанром"""
-        return [
-            game for game in self._games.values()
-            if game.genre == genre and game.is_available
-        ]
+        return [game for game in self._games.values() if game.genre == genre and game.is_available]
 
     def find_by_price_range(self, min_price: float, max_price: float) -> List[Game]:
         """Знаходить ігри в ціновому діапазоні"""
-        return [
-            game for game in self._games.values()
-            if min_price <= game.price <= max_price and game.is_available
-        ]
+        return [game for game in self._games.values() if min_price <= game.price <= max_price and game.is_available]
 
     def find_all_available(self) -> List[Game]:
         """Повертає всі доступні ігри"""

@@ -17,8 +17,7 @@ class GameStoreService:
     RETURN_DAYS_LIMIT = 14
     REGISTRATION_BONUS = 100.0
 
-    def __init__(self, game_repo: GameRepository, user_repo: UserRepository,
-                 purchase_repo: PurchaseRepository):
+    def __init__(self, game_repo: GameRepository, user_repo: UserRepository, purchase_repo: PurchaseRepository):
         self.game_repo = game_repo
         self.user_repo = user_repo
         self.purchase_repo = purchase_repo
@@ -39,28 +38,17 @@ class GameStoreService:
         if not game.is_available:
             return False, f"Гра '{game.title}' більше не доступна для покупки"
 
-        existing_purchase = self.purchase_repo.find_user_game_purchase(
-            user_id, game_id
-        )
+        existing_purchase = self.purchase_repo.find_user_game_purchase(user_id, game_id)
         if existing_purchase:
             return False, f"Ви вже купили гру '{game.title}'"
 
         if user.balance < game.price:
-            return False, (
-                f"Недостатньо коштів. "
-                f"Потрібно: {game.price}₴, доступно: {user.balance}₴"
-            )
+            return False, (f"Недостатньо коштів. " f"Потрібно: {game.price}₴, доступно: {user.balance}₴")
 
         user.balance -= game.price
         self.user_repo.update(user)
 
-        purchase = Purchase(
-            id=0,
-            user_id=user_id,
-            game_id=game_id,
-            purchase_date=datetime.now(),
-            price_paid=game.price
-        )
+        purchase = Purchase(id=0, user_id=user_id, game_id=game_id, purchase_date=datetime.now(), price_paid=game.price)
         self.purchase_repo.add(purchase)
 
         return True, f"Вітаємо! Ви купили гру '{game.title}' за {game.price}₴"
@@ -115,8 +103,7 @@ class GameStoreService:
         """Отримання всіх доступних ігор"""
         return self.game_repo.find_all_available()
 
-    def register_user(self, username: str, email: str, password: str
-                      ) -> Tuple[bool, str, Optional[User]]:
+    def register_user(self, username: str, email: str, password: str) -> Tuple[bool, str, Optional[User]]:
         """Реєстрація нового користувача"""
         if self.user_repo.username_exists(username):
             return False, f"Користувач з іменем '{username}' вже існує", None
@@ -127,19 +114,10 @@ class GameStoreService:
         if not password or len(password) < 4:
             return False, "Пароль повинен містити мінімум 4 символи", None
 
-        user = User(
-            id=0,
-            username=username,
-            email=email,
-            password_hash=password,
-            balance=self.REGISTRATION_BONUS
-        )
+        user = User(id=0, username=username, email=email, password_hash=password, balance=self.REGISTRATION_BONUS)
         created_user = self.user_repo.add(user)
 
-        return True, (
-            f"Вітаємо, {username}! "
-            f"Ви отримали бонус {self.REGISTRATION_BONUS}₴ на рахунок"
-        ), created_user
+        return True, (f"Вітаємо, {username}! " f"Ви отримали бонус {self.REGISTRATION_BONUS}₴ на рахунок"), created_user
 
     def get_user_by_id(self, user_id: int) -> Optional[User]:
         """Отримання користувача за ID"""

@@ -8,6 +8,7 @@ from typing import Optional
 @dataclass
 class Purchase:
     """Модель покупки гри"""
+
     id: int
     user_id: int
     game_id: int

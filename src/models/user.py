@@ -6,6 +6,7 @@ from dataclasses import dataclass
 @dataclass
 class User:
     """Модель користувача магазину ігор"""
+
     id: int
     username: str
     email: str

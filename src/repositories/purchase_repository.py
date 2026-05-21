@@ -26,16 +26,14 @@ class PurchaseRepository:
     def find_by_user(self, user_id: int) -> List[Purchase]:
         """Знаходить всі покупки користувача"""
         return [
-            purchase for purchase in self._purchases.values()
+            purchase
+            for purchase in self._purchases.values()
             if purchase.user_id == user_id and not purchase.is_returned
         ]
 
     def find_by_game(self, game_id: int) -> List[Purchase]:
         """Знаходить всі покупки гри"""
-        return [
-            purchase for purchase in self._purchases.values()
-            if purchase.game_id == game_id
-        ]
+        return [purchase for purchase in self._purchases.values() if purchase.game_id == game_id]
 
     def find_user_game_purchase(self, user_id: int, game_id: int) -> Optional[Purchase]:
         """Знаходить покупку гри конкретним користувачем"""

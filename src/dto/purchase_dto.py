@@ -6,6 +6,7 @@ from dataclasses import dataclass
 @dataclass
 class PurchaseDTO:
     """Об'єкт передачі даних для покупки"""
+
     id: int
     user_id: int
     game_id: int
@@ -22,5 +23,5 @@ class PurchaseDTO:
             game_id=purchase.game_id,
             purchase_date=purchase.purchase_date.strftime("%Y-%m-%d %H:%M"),
             price_paid=purchase.price_paid,
-            is_returned=purchase.is_returned
+            is_returned=purchase.is_returned,
         )

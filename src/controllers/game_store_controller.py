@@ -39,10 +39,7 @@ class GameStoreController:
         result += "-" * 60 + "\n"
         for game in games:
             dto = GameDTO.from_game(game)
-            result += (
-                f"ID: {dto.id} | {dto.title} | {dto.genre} | "
-                f"{dto.price}₴ | ⭐ {dto.rating}\n"
-            )
+            result += f"ID: {dto.id} | {dto.title} | {dto.genre} | " f"{dto.price}₴ | ⭐ {dto.rating}\n"
         return result
 
     def register_user_cli(self, username: str, email: str, password: str) -> str:
@@ -61,10 +58,7 @@ class GameStoreController:
         for game in games:
             dto = GameDTO.from_game(game)
             result += f"🎮 ID: {dto.id} | {dto.title}\n"
-            result += (
-                f"   Жанр: {dto.genre} | Ціна: {dto.price}₴ | "
-                f"⭐ {dto.rating}\n"
-            )
+            result += f"   Жанр: {dto.genre} | Ціна: {dto.price}₴ | " f"⭐ {dto.rating}\n"
             result += "-" * 50 + "\n"
         return result
 
