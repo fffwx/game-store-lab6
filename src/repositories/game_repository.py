@@ -1,6 +1,7 @@
 """Репозиторій для роботи з іграми"""
 
 from typing import List, Optional
+
 from src.models.game import Game, GameGenre
 
 

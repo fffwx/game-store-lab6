@@ -1,9 +1,9 @@
 """Контролер CLI - точка входу для користувача"""
 
-from src.services.game_store_service import GameStoreService
 from src.dto.game_dto import GameDTO
 from src.dto.user_dto import UserDTO
 from src.models.game import GameGenre
+from src.services.game_store_service import GameStoreService
 
 
 class GameStoreController:

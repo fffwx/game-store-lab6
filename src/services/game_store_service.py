@@ -1,14 +1,14 @@
 """Сервісний шар з бізнес-логікою магазину ігор"""
 
-from typing import List, Tuple, Optional
 from datetime import datetime
+from typing import List, Optional, Tuple
 
 from src.models.game import Game, GameGenre
-from src.models.user import User
 from src.models.purchase import Purchase
+from src.models.user import User
 from src.repositories.game_repository import GameRepository
-from src.repositories.user_repository import UserRepository
 from src.repositories.purchase_repository import PurchaseRepository
+from src.repositories.user_repository import UserRepository
 
 
 class GameStoreService:

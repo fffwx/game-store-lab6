@@ -1,15 +1,15 @@
-import unittest
-import sys
 import os
+import sys
+import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.models.game import Game, GameGenre
-from src.models.user import User
 from src.models.purchase import Purchase
+from src.models.user import User
 from src.repositories.game_repository import GameRepository
-from src.repositories.user_repository import UserRepository
 from src.repositories.purchase_repository import PurchaseRepository
+from src.repositories.user_repository import UserRepository
 from src.services.game_store_service import GameStoreService
 
 

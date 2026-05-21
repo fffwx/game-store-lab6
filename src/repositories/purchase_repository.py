@@ -1,6 +1,7 @@
 """Репозиторій для роботи з покупками"""
 
 from typing import List, Optional
+
 from src.models.purchase import Purchase
 
 

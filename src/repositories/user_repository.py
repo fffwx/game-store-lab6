@@ -1,6 +1,7 @@
 """Репозиторій для роботи з користувачами"""
 
 from typing import List, Optional
+
 from src.models.user import User
 
 
