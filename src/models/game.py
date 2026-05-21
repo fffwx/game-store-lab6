@@ -1,6 +1,7 @@
+"""Модель гри"""
+
 from dataclasses import dataclass
 from enum import Enum
-from typing import Optional
 
 
 class GameGenre(Enum):
@@ -23,7 +24,7 @@ class Game:
     price: float
     developer: str
     release_year: int
-    is_available: bool = True  # True - гра доступна для покупки
+    is_available: bool = True
     rating: float = 0.0
 
     def __eq__(self, other):

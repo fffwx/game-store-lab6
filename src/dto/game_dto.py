@@ -1,3 +1,5 @@
+"""DTO для гри"""
+
 from dataclasses import dataclass
 
 

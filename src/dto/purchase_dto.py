@@ -1,3 +1,5 @@
+"""DTO для покупки"""
+
 from dataclasses import dataclass
 
 

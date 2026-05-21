@@ -1,3 +1,5 @@
+"""DTO для користувача"""
+
 from dataclasses import dataclass
 
 
