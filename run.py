@@ -9,7 +9,7 @@ from src.repositories.purchase_repository import PurchaseRepository
 from src.services.game_store_service import GameStoreService
 from src.controllers.game_store_controller import GameStoreController
 from src.models.game import Game, GameGenre
-
+from src.models.user import User
 
 def init_test_data(game_repo, user_repo):
     """Ініціалізація тестових даних"""

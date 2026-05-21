@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # Основний додаток
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: game-store-app
+    ports:
+      - "8080:8080"  # Якщо буде API, або для CLI не потрібен
+    environment:
+      - PYTHONPATH=/app
+      - ENVIRONMENT=production
+      - DATABASE_URL=postgresql://game_user:game_pass@db:5432/game_store
+    volumes:
+      - ./data:/app/data  # Для збереження даних
+    depends_on:
+      - db
+    networks:
+      - game-store-network
+    stdin_open: true
+    tty: true
+    command: python run.py
+
+  # База даних PostgreSQL
+  db:
+    image: postgres:15-alpine
+    container_name: game-store-db
+    environment:
+      - POSTGRES_USER=game_user
+      - POSTGRES_PASSWORD=game_pass
+      - POSTGRES_DB=game_store
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - game-store-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U game_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Запуск тестів
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: game-store-tests
+    environment:
+      - PYTHONPATH=/app
+      - ENVIRONMENT=test
+    depends_on:
+      - db
+    networks:
+      - game-store-network
+    command: python -m unittest discover tests -v
+
+  # PgAdmin для керування БД (опціонально)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: game-store-pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@game-store.com
+      - PGADMIN_DEFAULT_PASSWORD=admin123
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - game-store-network
+    profiles:
+      - dev
+
+networks:
+  game-store-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

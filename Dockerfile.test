@@ -1,0 +1,24 @@
+# Dockerfile для запуску тестів
+
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app
+
+WORKDIR /app
+
+# Копіювання спочатку requirements (для кращого кешування)
+COPY requirements.txt .
+
+# Встановлення залежностей
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir pytest pytest-cov
+
+# Копіювання всього коду
+COPY src/ ./src/
+COPY tests/ ./tests/
+COPY run.py .
+
+# Команда для запуску тестів
+CMD ["python", "-m", "unittest", "discover", "tests", "-v"]
